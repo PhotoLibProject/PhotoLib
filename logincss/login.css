@@ -1,0 +1,37 @@
+.container {
+    			padding: 16px;
+    		}
+			.modal {
+			    align-content: center;
+			    width: 50%;
+			    margin: auto ;
+			    overflow: auto; /* Enable scroll if needed */
+			    background-color: rgb(0,0,0); /* Fallback color */
+			    background-color: rgba(0,0,0,0.3);
+			}
+			.modal-content {
+			    background-color: 5A5653;
+			    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+			    border: 1px solid #888;
+			    width: 60%; /* Could be more or less, depending on screen size */
+			}
+		input[type=text], input[type=password] {
+			    width: 100%;
+			    padding: 12px 20px;
+			    margin: 8px 0;
+			    display: inline-block;
+			    border: 1px solid #ccc;
+			    box-sizing: border-box;
+			}
+		form button{
+			width: 70%;
+			padding: 14px 20px;
+			margin: 8px 0;
+			cursor: pointer;
+		}
+		a button{
+			border:none;
+			width: 10%;
+			height: 30px;
+			cursor: pointer;
+		}
