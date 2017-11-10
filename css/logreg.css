@@ -1,5 +1,10 @@
-
+.info{	
+    		height: 50px;
+    		margin-top: -3px;
+    	}
 			.allform{
+				height: 50px;
+				z-index: 1;
 			margin-top: -3px;
 		}
 		table input{
@@ -17,4 +22,3 @@
 			color: red;
 			text-decoration: none;
 		}
-		
