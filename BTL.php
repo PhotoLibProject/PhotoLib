@@ -1,4 +1,5 @@
 
+<?php session_start(); ?>
 <html>
 	<head>
 		<title> </title>
@@ -13,6 +14,18 @@
 	</head>
 	<body class="p" style="background-image: url('highlighted-grey-background.jpg')">
 	<!--Phần đăng nhập và đăng ký -->
+		<?php 
+			if(isset($_SESSION['username'])){ ?>
+			<div align="center" class="info" >
+				<div align="right" style="color: white;width: 1200px;">
+					<?php
+						echo "Hội viên: "."<b>".$_SESSION['fullName']."</b>"." đăng nhập thành công ";
+						echo "<a href='logout.php' style='text-decoration: none;color:red'>Đăng xuất</a>";
+					?>
+				</div>
+			</div>
+		<?php 	} ?>
+	<?php if(!isset($_SESSION['username'])){ ?>
 	<div class="allform" align="center" >
 		<div class = "form1" align="right" style="width: 1200px">
 			<form method="post" action="checklogin.php">
@@ -22,7 +35,7 @@
 							<input type="text" name="username" placeholder="Đăng nhập...">
 						</td>
 						<td >
-							<input type="text" name="password" placeholder="Mật khẩu...">
+							<input type="password" name="password" placeholder="Mật khẩu...">
 						</td>
 						<td>
 							<button type="submit">Đăng nhập</button>
@@ -38,6 +51,8 @@
 			</form>
 		</div>
 	</div>
+	<?php } ?>
+	<div class='all'>
 	<div align="center">
 		<div class="div1">
 			<div class="logo" >
@@ -46,6 +61,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div align="center">
 		<!-- Các thanh menu điều hướng -->
 		<div id="menubar">
@@ -68,9 +84,12 @@
 				<li>
 					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">PLANET</a>
 				</li>
+				<li>
+					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">OTHER</a>
+				</li>
 
 				<li>
-					<p><pre>                         </pre></p>
+					<p><pre>            </pre></p>
 				</li>
 				<li>
 					<div align="center" class="search1">
@@ -99,7 +118,7 @@
 		?>
 		<div class="mySlides fade">
 			<?php
-				echo "<a href=''><img src='slide/$name' style='width:100%'/></a>";
+				echo "<a href='#'><img src='slide/$name' style='width:100%'/></a>";
 			?>
 		</div>
 
@@ -122,25 +141,28 @@
 	<div id='id01' class="modal">
 
 		<form class="modal-content animate">
-
-		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+			<div align="right">
+			<span  onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">×</span>
+			</div>
 			<div class="container">
 
-				<label><b>Username</b></label>
-				<input type="text" placeholder="Username" name="username" />
-				<label><b>Password</b></label>
-				<input type="Password" placeholder="Password" name="password">
-				<label><b>Repeat Pasword</b></label>
-				<input type="password" placeholder="Repeat Password" name="repassword">
-				<label><b>Họ và tên</b></label>
-				<input type="text" placeholder="Họ và tên" name="fullname">
-				<label><b>Email</b></label>
-				<input type="text" placeholder="email" name="email">
+				<label for='username'><b>Username</b></label>
+				<input id='username' type="text" placeholder="Username" name="username" required />
+				<label for='password'><b>Password</b></label>
+				<input id='password' type="Password" placeholder="Password" name="password" required>
+				<label for='name'><b>Họ và tên</b></label>
+				<input id='name' type="text" placeholder="Họ và tên" name="fullname" required>
+				<label for='email'><b>Email</b></label>
+				<input id='email' type="text" placeholder="email" name="email" required>
 				<div class ="buttonsgu" align="center">
 					<button type="submit" class="signupbtn">Đăng ký</button>
 				</div>
 			</div>
 		</form>
+	</div>
+	</div>
+	<div align="right">
+		<a href="#" style="text-decoration: none;color: white" alt="For admin">Admin</a>
 	</div>
 	<script src="js/slidejs.js"></script>
 	<script src="js/reg.js"></script>
