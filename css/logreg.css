@@ -1,11 +1,12 @@
-.info{	
+		.info{	
     		height: 50px;
     		margin-top: -3px;
     	}
-			.allform{
-				height: 50px;
-				z-index: 1;
+		.allform{
+			height: 50px;
+			z-index: 1;
 			margin-top: -3px;
+
 		}
 		table input{
 			width: 170px;
