@@ -25,6 +25,20 @@ SET time_zone = "+00:00";
 --
 -- Cấu trúc bảng cho bảng `comment`
 --
+CREATE DATABASE photolibrary;
+USE photolibrary;
+
+CREATE TABLE slide_img (
+  slideid int(5) not null primary key auto_increment,
+  name varchar(10) not null,
+  image varchar(500) not null
+  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+
+INSERT INTO slide_img (slideid,name,image) VALUES
+  (1,'NATURE','slide_img1.jpg'),
+  (2,'FOOTBALL','slide_img2.jpg'),
+  (3,'COUNTRY','slide_img3.jpg'),
+  (4,'PLANET','slide_img4.jpg');
 
 CREATE TABLE `comment` (
   `commentId` int(11) NOT NULL,
@@ -82,7 +96,10 @@ CREATE TABLE `user` (
   `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `fullName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `bornedDate` date NOT NULL,
-  `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+  `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY(userId),
+  UNIQUE (username),
+  UNIQUE (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -118,11 +135,6 @@ ALTER TABLE `photo_tag`
 ALTER TABLE `tag`
   ADD PRIMARY KEY (`tagId`);
 
---
--- Chỉ mục cho bảng `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`userId`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
