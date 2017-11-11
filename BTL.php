@@ -9,8 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="css/logreg.css">
 		<link rel="stylesheet" type="text/css" href="css/register.css">
 		<link rel="icon" type="image/gif/png" href="anonymous_mask1600.png">
-
-		
 	</head>
 	<body class="p" style="background-image: url('highlighted-grey-background.jpg')">
 	<!--Phần đăng nhập và đăng ký -->
@@ -18,10 +16,14 @@
 			if(isset($_SESSION['username'])){ ?>
 			<div align="center" class="info" >
 				<div align="right" style="color: white;width: 1200px;">
-					<?php
-						echo "Hội viên: "."<b>".$_SESSION['fullName']."</b>"." đăng nhập thành công ";
-						echo "<a href='logout.php' style='text-decoration: none;color:red'>Đăng xuất</a>";
-					?>
+					<div>
+							<?php
+								echo "<a href='member.php' style='padding:5px 5px;text-decoration:none;color:white'>"."<b>".$_SESSION['fullName']."</b>"."&nbsp"."<a>";
+							?>
+							<?php
+								echo "&nbsp"."<a href='logout.php' style='padding:5px 5px;text-decoration: none;color:red'>  Đăng xuất</a>";
+							?>
+					</div>
 				</div>
 			</div>
 		<?php 	} ?>
@@ -52,12 +54,14 @@
 		</div>
 	</div>
 	<?php } ?>
-	<div class='all'>
+
 	<div align="center">
-		<div class="div1">
-			<div class="logo" >
-				<!-- logo của trang web --> 
-				<a  href="BTL.php"> <img src="logo.png" width="150px" > </a>
+		<div class="div1" >
+			<div class="divlo" align="left">
+				<div class="logo">
+					<!-- logo của trang web --> 
+					<a  href="BTL.php"> <img src="logo.png" width="150px" > </a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -140,7 +144,7 @@
 	<!--form đăng ký -->
 	<div id='id01' class="modal">
 
-		<form class="modal-content animate">
+		<form action="checkreg.php" class="modal-content animate" method="post">
 			<div align="right">
 			<span  onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">×</span>
 			</div>
