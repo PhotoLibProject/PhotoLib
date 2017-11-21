@@ -28,17 +28,15 @@ SET time_zone = "+00:00";
 CREATE DATABASE photolibrary;
 USE photolibrary;
 
-CREATE TABLE slide_img (
-  slideid int(5) not null primary key auto_increment,
-  name varchar(10) not null,
-  image varchar(500) not null
-  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+CREATE TABLE admin(
+  aid int(10) not null primary key auto_increment,
+  username varchar(10) not null,
+  password varchar(10) not null
+);
 
-INSERT INTO slide_img (slideid,name,image) VALUES
-  (1,'NATURE','slide_img1.jpg'),
-  (2,'FOOTBALL','slide_img2.jpg'),
-  (3,'COUNTRY','slide_img3.jpg'),
-  (4,'PLANET','slide_img4.jpg');
+INSERT INTO admin(aid,username,password) VALUES(1,'admin','admin');
+
+
 
 CREATE TABLE `comment` (
   `commentId` int(11) NOT NULL,
@@ -57,7 +55,7 @@ CREATE TABLE `photo` (
   `photoId` int(5) NOT NULL,
   `photoName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `createdDate` date NOT NULL,
-  `uploadedUserId` int(3) NOT NULL,
+  `albumID` int(3) NOT NULL,
   `photoDescription` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -85,7 +83,21 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
+CREATE TABLE album (
+  albumID int(5) NOT NULL PRIMARY KEY,
+  albumName varchar(50) NOT NULL,
+  createdDate date NOT NULL,
+  image varchar(500),
+  userId int(3),
+  aid int(10),
+  CONSTRAINT fk_fk2 FOREIGN KEY (aid) REFERENCES admin(aid)
+);
 
+INSERT INTO album(albumName,createdDate,image,aid) VALUES 
+('NATURE',now(),'slide_img1.jpg',1),
+('FOOTBALL',now(),'slide_img2.jpg',1),
+('COUNTRY',now(),'slide_img3.jpg',1),
+('PLANET',now(),'slide_img4.jpg',1);
 --
 -- Cấu trúc bảng cho bảng `user`
 --
@@ -102,9 +114,6 @@ CREATE TABLE `user` (
   UNIQUE (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Chỉ mục cho các bảng đã đổ
---
 
 --
 -- Chỉ mục cho bảng `comment`
@@ -119,7 +128,7 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`photoId`),
-  ADD KEY `uploadedUserId` (`uploadedUserId`);
+  ADD KEY `albumId` (`albumId`);
 
 --
 -- Chỉ mục cho bảng `photo_tag`
@@ -169,6 +178,9 @@ ALTER TABLE `user`
 -- Các ràng buộc cho các bảng đã đổ
 --
 
+ALTER TABLE album
+  MODIFY albumID int(5) NOT NULL AUTO_INCREMENT;
+
 --
 -- Các ràng buộc cho bảng `comment`
 --
@@ -180,8 +192,9 @@ ALTER TABLE `comment`
 -- Các ràng buộc cho bảng `photo`
 --
 ALTER TABLE `photo`
-  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`uploadedUserId`) REFERENCES `user` (`userId`);
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`albumId`) REFERENCES `album` (`albumId`);
 
+ALTER TABLE album ADD CONSTRAINT album_ibfk_1 FOREIGN KEY(userID) REFERENCES user(userID);
 --
 -- Các ràng buộc cho bảng `photo_tag`
 --
