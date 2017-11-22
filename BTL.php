@@ -18,10 +18,10 @@
 				<div align="right" style="color: white;width: 1200px;">
 					<div>
 							<?php
-								echo "<a href='member.php' style='padding:5px 5px;text-decoration:none;color:white'>"."<b>".$_SESSION['fullName']."</b>"."&nbsp"."<a>";
+								echo "<a href='member/member.php' style='padding:5px 5px;text-decoration:none;color:white'>"."<b>".$_SESSION['fullName']."</b>"."&nbsp"."<a>";
 							?>
 							<?php
-								echo "&nbsp"."<a href='logout.php' style='padding:5px 5px;text-decoration: none;color:red'>  Đăng xuất</a>";
+								echo "&nbsp"."<a href='member/logout.php' style='padding:5px 5px;text-decoration: none;color:red'>  Đăng xuất</a>";
 							?>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 	<?php if(!isset($_SESSION['username'])){ ?>
 	<div class="allform" align="center" >
 		<div class = "form1" align="right" style="width: 1200px">
-			<form method="post" action="checklogin.php">
+			<form method="post" action="member/checklogin.php">
 				<table>
 					<tr>
 						<td >
@@ -77,16 +77,16 @@
 					<a href="BTL.php" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'"">HOME</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">NATURE</a>
+					<a href="gallery.php?id=1&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">NATURE</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">FOOTBALL</a>
+					<a href="gallery.php?id=2&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">FOOTBALL</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">COUNTRY</a>
+					<a href="gallery.php?id=3&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">COUNTRY</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">PLANET</a>
+					<a href="gallery.php?id=4&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">PLANET</a>
 				</li>
 				<li>
 					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">OTHER</a>
@@ -113,16 +113,19 @@
 		<?php 
 		include 'connect.php';
 		//khoi tao bien file anh slide
-		$sql = "SELECT * FROM slide_img";
+		$sql = "SELECT * FROM album";
 		$result = mysql_query($sql);
 
 		while($row = mysql_fetch_assoc($result)){
 			$name = $row['image'];
+			$pid = $row['aid'];
 
 		?>
 		<div class="mySlides fade">
 			<?php
-				echo "<a href='#'><img src='slide/$name' style='width:100%'/></a>";
+				//au = 1: lựa chọn album của admin
+				//au = 2: lựa chọn album của users
+				echo "<a href='gallery.php?id=$pid&au=1'><img src='p_album/$name' style='width:100%'/></a>";
 			?>
 		</div>
 
@@ -144,7 +147,7 @@
 	<!--form đăng ký -->
 	<div id='id01' class="modal">
 
-		<form action="checkreg.php" class="modal-content animate" method="post">
+		<form action="member/checkreg.php" class="modal-content animate" method="post">
 			<div align="right">
 			<span  onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">×</span>
 			</div>
@@ -165,8 +168,10 @@
 		</form>
 	</div>
 	</div>
-	<div align="right">
-		<a href="#" style="text-decoration: none;color: white" alt="For admin">Admin</a>
+	<div>
+		<div style="position: fixed;bottom:0;right: 0">
+			<a href="admin/admin.php" style="text-decoration: none;color: white" alt="For admin">Admin</a>
+		</div>
 	</div>
 	<script src="js/slidejs.js"></script>
 	<script src="js/reg.js"></script>
