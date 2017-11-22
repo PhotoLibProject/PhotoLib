@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php session_start();
+	$aid = $_SESSION['userId'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +8,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/allweb.css">
 	<link rel="stylesheet" type="text/css" href="../css/logreg.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body class="p" style="background-image: url('../highlighted-grey-background.jpg')">
 	<?php 
@@ -45,16 +48,16 @@
 					<a href="../BTL.php" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'"">HOME</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">NATURE</a>
+					<a href="../gallery.php?id=1&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">NATURE</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">FOOTBALL</a>
+					<a href="../gallery.php?id=2&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">FOOTBALL</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">COUNTRY</a>
+					<a href="../gallery.php?id=3&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">COUNTRY</a>
 				</li>
 				<li>
-					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">PLANET</a>
+					<a href="../gallery.php?id=4&au=1" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">PLANET</a>
 				</li>
 				<li>
 					<a href="#" onmouseenter="this.style.backgroundColor='gray'" onmouseleave="this.style.backgroundColor='#333'">OTHER</a>
@@ -75,7 +78,32 @@
 			</ul>
 		</div>
 	</div>
-	
-	
+	<div>
+		<p align="center" style="font-size: 30px;color:white"> Album List</p>
+	</div>
+	<div>
+		<div align="center" style="text-align: center">	
+			<?php
+				include '../connect.php';
+				if(isset($_SESSION['userId'])){
+					$sql="SELECT * FROM album WHERE userID=$aid";
+					$result = mysql_query($sql);
+					?><section>
+						<ul class="lb-album"><?
+
+						while($row = mysql_fetch_assoc($result)){
+							$image = $row['image'];
+								echo "<li>";
+									echo "<a href='#' > <img src='../p_album/$image' style='max-width:150px;max-height:130px' ></a>";
+								echo "</li>";								
+								
+							}
+						}?>
+							
+						</ul>
+					</section>
+		</div>
+	</div>
+
 </body>
 </html>

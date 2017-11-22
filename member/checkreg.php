@@ -90,6 +90,7 @@
 		unset($_SESSION['check']);
 		$sql = "INSERT INTO user (username,password,fullName,bornedDate,email) VALUES ('$username','$password','$str1',now(),'$email')";
 		if($con->query($sql) === TRUE){
+			
 			header("location:registration.php");
 		}
 	}
